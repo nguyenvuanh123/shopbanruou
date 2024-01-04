@@ -46,13 +46,15 @@
 											break;
 									}
 									?></strong></td>
+									<?php if ($login->level == '0') { ?>
 									<td class="list_td aligncenter">
 							            <a href="../admin/admin/edit/<?php echo $value->id; ?>" title="Sửa"><span class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;
 							            <?php if ($value->level!='0') { ?>
 							            	<a href="../admin/admin/del/<?php echo $value->id; ?>" title="Xóa"> <span class="glyphicon glyphicon-remove" onclick=" return confirm('Bạn chắc chắn muốn xóa')"></span> </a>
 							            <?php } ?>
 							            
-								    </td>    
+								    </td>  
+									<?php } ?>  
 				                </tr>
 							<?php } ?>
 			    		</tbody>

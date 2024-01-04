@@ -79,6 +79,12 @@
 					</div>
 					  </div>
 					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-offset-2 col-sm-2 control-label">Ngày sinh</label>
+					    <div class="col-sm-4">
+							<input type="date" class="form-control" id="birthdate" placeholder="" required>
+					    </div>
+					  </div>
+					  <div class="form-group">
 					    <div class="col-sm-offset-4 col-sm-7">
 					      <button type="submit" class="btn btn-success">Đăng ký</button>
 					    </div>
@@ -91,6 +97,20 @@
 		</div>
 		<?php $this->load->view('site/footer',$this->data); ?>
 	</div>
+	<script>
+document.getElementById('birthdate').addEventListener('change', function() {
+    var selectedDate = new Date(this.value);
+    var currentDate = new Date();
+    var minDate = new Date(currentDate);
+    minDate.setFullYear(currentDate.getFullYear() - 18);
+
+    // Kiểm tra nếu ngày chọn nhỏ hơn 18 năm so với ngày hiện tại
+    if (selectedDate > minDate) {
+        alert('Bạn phải đủ 18 tuổi để tiếp tục.');
+        this.value = ''; // Xóa ngày sinh nếu không đủ tuổi
+    }
+});
+</script>
     <script src="<?php echo public_url('site/'); ?>bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -32,7 +32,11 @@
 											<td><?php echo $i = $i + 1 ?></td>
 											<td><?php echo $items['name']; ?></td>
 											<td><img src="<?php echo base_url('upload/product/'.$items['image_link']); ?>" class="img-thumbnail" alt="" style="width: 50px;"></td>
-											<td><a class="cart-sumsub" href="<?php echo base_url('cart/update/'.$items['id'].'/sub'); ?>">-</a><input type="text" value="<?php echo $items['qty']; ?>" style="width: 30px;text-align: center;"><a class="cart-sumsub" href="<?php echo base_url('cart/update/'.$items['id'].'/sum'); ?>">+</a></td>
+											<td>
+												<a class="cart-sumsub" href="<?php echo base_url('cart/update/'.$items['id'].'/sub'); ?>">-</a>
+												<input type="text" value="<?php echo $items['qty']; ?>" style="width: 30px; text-align: center;" disabled>
+												<a class="cart-sumsub" href="<?php echo base_url('cart/update/'.$items['id'].'/sum'); ?>">+</a>
+											</td>
 											<td><?php echo number_format($items['subtotal']); ?> VNĐ</td>
 											<td><a  href="<?php echo base_url('cart/del/'.$items['id']); ?>"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
 										</tr>
@@ -74,3 +78,4 @@
 						
 					</div>
 				</div>
+				

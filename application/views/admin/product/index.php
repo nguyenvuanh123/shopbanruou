@@ -59,7 +59,8 @@
 									<th class="text-center">ID</th>
 									<th>Tên sản phẩm</th>
 									<th>Danh mục</th>
-									<th>Giá</th>		
+									<th>Giá</th>
+									<th>Số lượng</th>		
 									<th>Hành động</th>
 								</tr>
 							</thead>
@@ -82,6 +83,8 @@
 													<strong><?php echo number_format($value->price); ?> VNĐ</strong>
 												<?php } ?>
 										</td>
+										<td style="vertical-align: middle"><strong><?php echo $value->quantity; ?></strong></td>
+
 										<td class="list_td aligncenter">
 								            <a href="<?php echo admin_url('product/edit/'.$value->id); ?>" title="Sửa"><span class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;
 								            <a id="<?php echo $value->id; ?>" title="Xóa" class="remove" onclick=" return confirm('Bạn chắc chắn muốn xóa')"> <span class="glyphicon glyphicon-remove" ></span> </a>

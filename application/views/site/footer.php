@@ -38,13 +38,12 @@
 			</div>
 		</div>
 		<div class="row" id="footer">
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 10px 8px; margin-top: 8px">
 				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
 					<address>
-					  <strong>    SHOP BÁN RƯỢU</strong><br>
-					  <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Địa chỉ: Liên Chiểu - Đà Nẵng<br>
-					  <span class="glyphicon glyphicon-phone" aria-hidden="true"></span> Điện thoại: 01215345336<br>
-					  Copyright ©2023 - Design by ---
+					  <strong>    CITA DE VINO</strong><br>
+					  <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Địa chỉ: Lô 33A Khu TTTM TSQ - Mỗ Lao - Hà Đông - Hà Nội<br>
+					  <span class="glyphicon glyphicon-phone" aria-hidden="true"></span> Điện thoại: 0335238806<br>
 					</address>
 				</div>
 				<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 text-right">

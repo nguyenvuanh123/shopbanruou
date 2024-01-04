@@ -81,7 +81,7 @@ class User extends MY_Controller {
 		$this->form_validation->set_error_delimiters('<p class="text-center" style="padding:5px;border-bottom:0px;">', '</p>');
 		$user = $this->session->userdata('user');
 		if(isset($user)) {
-			redirect(base_url());
+			redirect(base_url().'index.php?msg=2');
 		}
 		$message_success = $this->session->flashdata('message_success');
 		$this->data['message_success'] = $message_success;

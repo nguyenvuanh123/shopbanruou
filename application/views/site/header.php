@@ -1,9 +1,9 @@
 <div class="row" style="margin-top: 8px;height: 110px">
 			<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 clearpadding">
-				<a href="<?php echo base_url(); ?>"><img style="max-height: 180px;width: 100%;" src="upload/logo.jpg" alt="" class="img-responsive"></a>
+				<a href="<?php echo base_url(); ?>"><img src="upload\product\logo-layout-header.jpg" alt="" class="img-responsive" style="width: 100%; height: 180px"></a>
 			</div>
 			<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 clearpadding">
-				<a href="#"><img style="max-height: 180px;width: 100%;" src="https://ruouvangminhnguyet.vn/admin/slidetruotanh/banner-vang.jpg" alt="" class="img-responsive"></a>
+				<a href="#"><img style="max-height: 180px;width: 100%" src="https://ruouvangminhnguyet.vn/admin/slidetruotanh/banner-vang.jpg" alt="" class="img-responsive"></a>
 			</div>
 		</div>
 		<div class="row">
@@ -45,6 +45,7 @@
 			        
 			        <?php if (!isset($user)) { ?>
 			        	<li><a href="<?php echo base_url('dang-nhap'); ?>">Đăng nhập</a></li>
+						<li><a href="<?php echo base_url('dang-ky'); ?>">Đăng ký</a></li>
 			        <?php }else{ ?>
 						<li class="dropdown">
 				          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Xin chào: <?php echo $user->name; ?><span class="caret"></span></a>

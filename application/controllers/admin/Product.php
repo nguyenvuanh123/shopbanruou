@@ -70,7 +70,7 @@ class Product extends MY_Controller {
 		
 		$input['limit'] = array($config['per_page'],$segment);
 
-		$this->db->select('product.id as id,product.name as name,price,discount,image_link,view,buyed,catalog.name as namecatalog');
+		$this->db->select('product.*, catalog.name as namecatalog, catalog.id as idcatalog, product.quantity');
 		$this->db->join('catalog','catalog.id = product.catalog_id');
 		$product = $this->product_model->get_list($input);
 		$this->data['product']= $product;
@@ -107,6 +107,7 @@ class Product extends MY_Controller {
 					'catalog_id' => $this->input->post('catalog_id'),
 					'price' => $this->input->post('price'),
 					'discount' => $this->input->post('discount'),
+					'quantity' => $this->input->post('quantity'),
 					'created' => now()
 					);
 				if ($this->product_model->create($data)) {
@@ -126,64 +127,78 @@ class Product extends MY_Controller {
 		$this->data['catalog'] = $this->list_catalog();
 		$id = $this->uri->segment(4);
 		$product = $this->product_model->get_info($id);
-		
+	
 		if (empty($product)) {
 			$this->session->set_flashdata('message_fail', 'Sản phẩm không tồn tại');
 			redirect(admin_url('product'));
 		}
-		$this->data['product'] = $product; 
+	
+		$this->data['product'] = $product;
+	
 		if ($this->input->post()) {
-			$this->form_validation->set_rules('name','Tên sản phẩm','required');
-			$this->form_validation->set_rules('catalog_id','sản phẩm','required');
-			$this->form_validation->set_rules('price','Giá sản phẩm','required');
+			$this->form_validation->set_rules('name', 'Tên sản phẩm', 'required');
+			$this->form_validation->set_rules('catalog_id', 'Danh mục sản phẩm', 'required');
+			$this->form_validation->set_rules('price', 'Giá sản phẩm', 'required');
+			$this->form_validation->set_rules('quantity', 'Số lượng', 'required'); // Thêm quy tắc cho quantity
+	
 			if ($this->form_validation->run()) {
 				$price = $this->input->post('price');
 				$discount = $this->input->post('discount');
-				$data = array();
 				$data = array(
 					'name' => $this->input->post('name'),
 					'content' => $this->input->post('content'),
 					'catalog_id' => $this->input->post('catalog_id'),
-					'price' => str_replace(',','',$price),
-					'discount' => str_replace(',','',$discount)
-					);
+					'price' => str_replace(',', '', $price),
+					'discount' => str_replace(',', '', $discount),
+					'quantity' => $this->input->post('quantity'), // Lấy giá trị quantity từ form
+				);
+	
 				$path = './upload/product/';
 				$image_link = '';
-				$image_link = $this->upload_library->upload($path,'image');
+				$image_link = $this->upload_library->upload($path, 'image');
+	
 				if ($image_link != '') {
 					$data['image_link'] = $image_link;
-					$image = './upload/product/'.$product->image_link;
+					$image = './upload/product/' . $product->image_link;
+	
 					if (file_exists($image)) {
 						unlink($image);
 					}
 				}
+	
 				$image_list = array();
-				$image_list = $this->upload_library->upload_file($path,'list_image');
+				$image_list = $this->upload_library->upload_file($path, 'list_image');
 				$image_list_json = json_encode($image_list);
+	
 				if (!empty($image_list)) {
 					$data['image_list'] = $image_list_json;
 					$image_list = json_decode($product->image_list);
+	
 					if (is_array($image_list)) {
 						foreach ($image_list as $value) {
-							$image = './upload/product/'.$value;
+							$image = './upload/product/' . $value;
+	
 							if (file_exists($image)) {
 								unlink($image);
 							}
 						}
 					}
 				}
-				if ($this->product_model->update($id,$data)) {
+	
+				if ($this->product_model->update($id, $data)) {
 					$this->session->set_flashdata('message_success', 'Thay đổi sản phẩm thành công');
-				}else{
+				} else {
 					$this->session->set_flashdata('message_fail', 'Thay đổi sản phẩm thất bại');
 				}
+	
 				redirect(admin_url('product'));
 			}
 		}
-
-		$this->data['temp']='admin/product/edit';
-		$this->load->view('admin/main',$this->data);
+	
+		$this->data['temp'] = 'admin/product/edit';
+		$this->load->view('admin/main', $this->data);
 	}
+	
 	public function del()
 	{
 		$id = isset($_POST['id'])?$_POST['id']:'NULL';

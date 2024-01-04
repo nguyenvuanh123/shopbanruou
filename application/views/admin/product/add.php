@@ -67,6 +67,15 @@
 					</div>
 				  </div>
 				  <div class="form-group">
+						<label for="inputEmail3" class="col-sm-2 control-label">Số lượng</label>
+						<div class="col-sm-5">
+							<input type="text" name='quantity' class="form-control" id="inputEmail3" placeholder="" value="<?php echo set_value('quantity'); ?>">
+						</div>
+						<div class="col-sm-4">
+							<?php echo form_error('quantity'); ?>
+						</div>
+					</div>
+					<div class="form-group">
 				    <label for="inputEmail3" class="col-sm-2 control-label">Giảm giá</label>
 				    <div class="col-sm-5">
 				      <input type="text" name='discount' class="form-control" id="inputEmail3" placeholder="" value="<?php echo set_value('discount'); ?>">

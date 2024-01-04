@@ -7,6 +7,7 @@ class Order extends MY_Controller {
 		parent::__construct();
 		
 		
+		$this->load->model('product_model');
 
 		$this->load->library('form_validation');
 		$this->load->helper('form');
@@ -46,6 +47,21 @@ class Order extends MY_Controller {
 				$this->load->model('transaction_model');
 				$this->transaction_model->create($data);
 				$transaction_id = $this->db->insert_id();
+
+				// Kiểm tra số lượng sản phẩm có sẵn trước khi đặt hàng
+				foreach ($carts as $items) {
+					$product = $this->product_model->get_info($items['id']);
+		
+					if ($product && $items['qty'] > $product->quantity) {
+						// Số lượng mua vượt quá số lượng có sẵn
+						$this->session->set_flashdata('message', 'Sản phẩm ' . $product->name . ' chỉ còn ' . $product->quantity . ' sản phẩm trong kho.');
+						redirect(base_url('cart'));
+					}
+
+					  // Trừ số lượng sản phẩm trong kho
+					  $new_quantity = $product->quantity - $items['qty'];
+					  $this->product_model->update($items['id'], array('quantity' => $new_quantity));
+				}
 
 				$this->load->model('order_model');
 				foreach ($carts as $items) {

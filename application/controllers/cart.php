@@ -27,6 +27,7 @@ class Cart extends MY_Controller {
 	}
 	public function add()
 	{
+		if ($this->session->userdata('user')){
 		$id = $this->uri->rsegment(3);
 		$id = intval($id);
 		$product = $this->product_model->get_info($id);
@@ -42,7 +43,11 @@ class Cart extends MY_Controller {
 		$data['name'] = $product->name;
 		$data['image_link'] = $product->image_link;
 		$this->cart->insert($data);
-		redirect(base_url('cart'));
+		redirect(base_url().'index.php?msg=1');
+		}
+		else{
+			redirect(base_url().'index.php?msg=4');
+		}
 	}
 	public function update()
 	{
